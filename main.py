@@ -86,6 +86,6 @@ def main():
     root = '/Users/Brandon/Desktop/file_compliance/testing'
     illegal_chars = ['$', '%', '^', '*', ' ']
 
-    create_compliance_log(root, illegal_chars, replace=True)
+    create_compliance_log(root, illegal_chars, replace=False)
 
 main()
