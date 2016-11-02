@@ -3,10 +3,14 @@ import sys
 
 
 def list_files_in(root_dir):
+    '''Returns a list of the full paths to
+       files/folders contained in $root_dir.'''
     return [root_dir + "/" + f for f in os.listdir(root_dir)]
 
 
 def check_length_violations(files, max_len=250):
+    '''Returns a list of paths to files/folders contained in $files
+       that are greater than 250 characters.'''
     violations = []
     for f in files:
         if len(f) >= max_len:
@@ -15,11 +19,20 @@ def check_length_violations(files, max_len=250):
 
 
 def find_occurences(s, ch):
+    '''Returns the list of indexes where $ch occurs in $s
+
+       s is assumed to be a string. ch is assumed to be a 1 character string.
+    '''
     return [i for i, letter in enumerate(s) if letter == ch]
 
 
 def check_illegal_chars(root, directories, illegal_characters,
                         replacement_char='-', replace=False):
+    '''Returns a list of paths to files/folders in $root that contain
+       characters specificed in $illegal_characters, a list.
+
+       If replace==True, the illegal characters are replaced by
+       replacement_char first list is returned.'''
     violations = []
     for directory in directories:
         for character in illegal_characters:
@@ -42,6 +55,8 @@ def create_compliance_log(root,
                           max_len=250,
                           replace=False,
                           log_path='compliance_log.txt'):
+    '''Logs paths to files/folders that have illegal characters or are longer
+       than $max_len using above functions. Logs to $log_path.'''
 
     # list of all files in $root with full path
     files = list_files_in(root)
