@@ -5,7 +5,7 @@ import sys
 def list_files_in(root_dir):
     '''Returns a list of the full paths to
        files/folders contained in $root_dir.'''
-    return [root_dir + "/" + f for f in os.listdir(root_dir)]
+    return [root_dir + f for f in os.listdir(root_dir)]
 
 
 def check_length_violations(files, max_len=250):
@@ -70,28 +70,39 @@ def create_compliance_log(root,
     directories_with_illegal_length = check_length_violations(files,
                                                               max_len=max_len)
 
+    # writes to log all paths containing illegal characters
     f = open(log_path, 'w')
     for d in directories_with_illegal_chars:
-        f.write('illegal char: ' + d + '\n')
-    f.write('\n'*2)
+        f.write('Illegal char: ' + d + '\n')
+
+    # skips to spaces if len(directories_with_illegal_chars) > 0
+    if len(directories_with_illegal_chars) > 0:
+        f.write('\n'*2)
+
+    # writes to log all paths > 250 chars
     for d in directories_with_illegal_length:
-        f.write('!!Greater than ' + str(max_len) + ": " + str(d) + '\n')
+        f.write('Greater than ' + str(max_len) + ": " + str(d) + '\n')
 
     f.close()
 
 
 def main():
-    if len(sys.argv) == 2:
+    if len(sys.argv) == 3:
         root = sys.argv[1]
-        valid_replace_arg = ['-r', '--replace']
-        if sys.argv[2] not in replace_arg:
-            replace = True
-        elif sys.argv[2] not in valid_replace_arg and sys.argv[2] != ''
-
+        replace = False
+        try:
+            valid_replace_arg = ['-r', '--replace']
+            if sys.argv[3] in valid_replace_arg:
+                replace = True
+            else:
+                raise ValueError("Incorrect flag.")
+        except:
+            pass
         illegal_chars = ['$', '%', '^', '*', ' ']
-        create_compliance_log(root, illegal_chars, replace=False)
+        create_compliance_log(root, illegal_chars, replace=replace)
+
     else:
-        print("illegal number of arguments. Must have exactly 2.")
+        print("illegal number of arguments. Must have exactly 3.")
 
 
 main()
