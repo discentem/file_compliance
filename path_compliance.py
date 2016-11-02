@@ -83,6 +83,11 @@ def create_compliance_log(root,
 def main():
     if len(sys.argv) == 2:
         root = sys.argv[1]
+        valid_replace_arg = ['-r', '--replace']
+        if sys.argv[2] not in replace_arg:
+            replace = True
+        elif sys.argv[2] not in valid_replace_arg and sys.argv[2] != ''
+
         illegal_chars = ['$', '%', '^', '*', ' ']
         create_compliance_log(root, illegal_chars, replace=False)
     else:
