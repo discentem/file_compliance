@@ -70,8 +70,6 @@ def create_compliance_log(root,
     directories_with_illegal_length = check_length_violations(files,
                                                               max_len=max_len)
 
-    print(directories_with_illegal_length)
-
     f = open(log_path, 'w')
     for d in directories_with_illegal_chars:
         f.write('illegal char: ' + d + '\n')
@@ -83,9 +81,12 @@ def create_compliance_log(root,
 
 
 def main():
-    root = '/Users/Brandon/Desktop/file_compliance/testing'
-    illegal_chars = ['$', '%', '^', '*', ' ']
+    if len(sys.argv) == 2:
+        root = sys.argv[1]
+        illegal_chars = ['$', '%', '^', '*', ' ']
+        create_compliance_log(root, illegal_chars, replace=False)
+    else:
+        print("illegal number of arguments. Must have exactly 2.")
 
-    create_compliance_log(root, illegal_chars, replace=False)
 
 main()
