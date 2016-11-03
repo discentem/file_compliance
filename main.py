@@ -15,13 +15,13 @@ def illegal_characters(name, illegal_characters='$%^* '):
 
 
 def fix_chars(name,
-              illegal_characters=None,
+              illegal_chars=None,
               replacement_char='-'):
-    if illegal_characters is None:
-        illegal_characters = ['$', '%', '^', '*', ' ']
+    if illegal_chars is None:
+        illegal_chars = ['$', '%', '^', '*', ' ']
     new_name = ""
     for x in name:
-        if x in illegal_characters:
+        if x in illegal_chars:
             new_name += replacement_char
         else:
             new_name += x
