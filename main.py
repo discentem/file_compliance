@@ -2,7 +2,7 @@ import os
 import sys
 import re
 
-illegals = ['$', '%', '^', '*', ' ']
+illegals = '$%^* '
 
 
 def illegal_length(name, max_length=250):
