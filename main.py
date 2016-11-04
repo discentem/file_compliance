@@ -13,7 +13,6 @@ def illegal_characters(name, illegal_characters=illegals):
     for char in illegal_characters:
         if char in name:
             return True
-
     return False
 
 
