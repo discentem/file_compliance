@@ -2,30 +2,22 @@ import os
 import sys
 import re
 
+illegals = '$%^* '
 
 def illegal_length(name, max_length=250):
-    if len(name) > max_length:
-        return True
+    return len(name) > max_length:
 
-
-def illegal_characters(name, illegal_characters='$%^* '):
+def illegal_characters(name, illegal_characters=illegals):
+    illegal = false
     for char in illegal_characters:
-        if char in name:
-            return True
-
+        illegal = char in name
+    
+    return illegal
 
 def fix_chars(name,
-              illegal_chars=None,
+              illegal_chars=illegals,
               replacement_char='-'):
-    if illegal_chars is None:
-        illegal_chars = ['$', '%', '^', '*', ' ']
-    new_name = ""
-    for x in name:
-        if x in illegal_chars:
-            new_name += replacement_char
-        else:
-            new_name += x
-    return new_name
+    return ''.join([ str.replace(x, replacement_char) for x in name if x in illegal_chars ])
 
 
 def join_paths_wrap(prefix_msg, root, name):
