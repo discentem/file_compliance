@@ -14,7 +14,7 @@ def illegal_characters(name, illegal_characters=illegals):
         if char in name:
             return True
 
-    return false
+    return False
 
 
 def fix_chars(name,
