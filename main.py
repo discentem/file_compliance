@@ -17,13 +17,13 @@ def illegal_characters(name, illegal_characters=illegals):
 def fix_chars(name,
               illegal_chars=illegals,
               replacement_char='-'):
-     new_name = ""
-     for x in name:
-         if x in illegal_chars:
-             new_name += replacement_char
-         else:
-             new_name += x
-     return new_name
+    new_name = ""
+    for x in name:
+        if x in illegal_chars:
+            new_name += replacement_char
+        else:
+            new_name += x
+    return new_name
 
 
 def join_paths_wrap(prefix_msg, root, name):
