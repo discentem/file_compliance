@@ -17,7 +17,7 @@ def illegal_characters(name, illegal_characters=illegals):
 def fix_chars(name,
               illegal_chars=illegals,
               replacement_char='-'):
-    return ''.join([ str.replace(x, replacement_char) for x in name ])
+    return ''.join([ str.replace(x, replacement_char) for x in name if x in illegal_chars ])
 
 
 def join_paths_wrap(prefix_msg, root, name):
