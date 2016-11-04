@@ -5,19 +5,25 @@ import re
 illegals = '$%^* '
 
 def illegal_length(name, max_length=250):
-    return len(name) > max_length:
+    return len(name) > max_length
 
 def illegal_characters(name, illegal_characters=illegals):
-    illegal = false
+    illegal = False
     for char in illegal_characters:
         illegal = char in name
-    
+
     return illegal
 
 def fix_chars(name,
               illegal_chars=illegals,
               replacement_char='-'):
-    return ''.join([ str.replace(x, replacement_char) for x in name if x in illegal_chars ])
+     new_name = ""
+     for x in name:
+         if x in illegal_chars:
+             new_name += replacement_char
+         else:
+             new_name += x
+     return new_name
 
 
 def join_paths_wrap(prefix_msg, root, name):
