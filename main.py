@@ -10,11 +10,11 @@ def illegal_length(name, max_length=250):
 
 
 def illegal_characters(name, illegal_characters=illegals):
-    illegal = False
     for char in illegal_characters:
-        return char in name
+        if char in name:
+            return True
 
-    return illegal
+    return false
 
 
 def fix_chars(name,
