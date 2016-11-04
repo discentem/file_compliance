@@ -1,4 +1,4 @@
-**Disclaimer**: This can damage file and folder names if used without careful consideration.
+***Disclaimer***: This can damage file and folder names if used incorrectly or carelessly. I am not responsible for damage.
 
 **Purpose**: This program takes in a directory, $root_dir, and checks the absolute path of every file/folder for the following violations:
 - violation: path is < 250 characters longer
