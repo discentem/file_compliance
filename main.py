@@ -10,7 +10,7 @@ def illegal_length(name, max_length=250):
 def illegal_characters(name, illegal_characters=illegals):
     illegal = false
     for char in illegal_characters:
-        illegal = car in name
+        illegal = char in name
     
     return illegal
 
