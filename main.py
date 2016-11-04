@@ -2,17 +2,20 @@ import os
 import sys
 import re
 
-illegals = '$%^* '
+illegals = ['$', '%', '^', '*', ' ']
+
 
 def illegal_length(name, max_length=250):
     return len(name) > max_length
 
+
 def illegal_characters(name, illegal_characters=illegals):
     illegal = False
     for char in illegal_characters:
-        illegal = char in name
+        return char in name
 
     return illegal
+
 
 def fix_chars(name,
               illegal_chars=illegals,
@@ -31,17 +34,24 @@ def join_paths_wrap(prefix_msg, root, name):
 
 
 valid_replace_args = ['-r', '--replace']
+print(len(sys.argv))
+print(sys.argv)
 if len(sys.argv) == 2 or len(sys.argv) == 3:
     root = sys.argv[1]
-    for root, dirs, files in os.walk(root, topdown=True):
-        for name in files:
-            if illegal_characters(name) is True:
-                os.rename(join_paths_wrap('', root, name),
-                          join_paths_wrap('', root, fix_chars(name)))
-        for name in dirs:
-            if illegal_characters(name) is True:
-                os.rename(join_paths_wrap('', root, name),
-                          join_paths_wrap('', root, fix_chars(name)))
+    print(root)
+    try:
+        if sys.argv[2] in valid_replace_args:
+            for root, dirs, files in os.walk(root, topdown=True):
+                for name in files:
+                    if illegal_characters(name) is True:
+                        os.rename(join_paths_wrap('', root, name),
+                                  join_paths_wrap('', root, fix_chars(name)))
+                for name in dirs:
+                    if illegal_characters(name) is True:
+                        os.rename(join_paths_wrap('', root, name),
+                                  join_paths_wrap('', root, fix_chars(name)))
+    except IndexError:
+        pass
 
     for root, dirs, files in os.walk(root, topdown=True):
         for name in files:
