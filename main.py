@@ -34,11 +34,8 @@ def join_paths_wrap(prefix_msg, root, name):
 
 
 valid_replace_args = ['-r', '--replace']
-print(len(sys.argv))
-print(sys.argv)
 if len(sys.argv) == 2 or len(sys.argv) == 3:
     root = sys.argv[1]
-    print(root)
     try:
         if sys.argv[2] in valid_replace_args:
             for root, dirs, files in os.walk(root, topdown=True):
