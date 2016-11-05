@@ -1,6 +1,6 @@
 ***Disclaimer***: This can damage file and folder names if used incorrectly or carelessly. I am not responsible for damage.
 
-**Purpose**: This program takes in a directory, $root_dir, and checks the absolute path of every subfile/subfolder for the following violations and prints the violations to console:
+**Purpose**: This program takes in a directory, $root_dir, and checks the absolute path of every subfile/subfolder for the following violations and logs to `file_compliance_log`:
 - violation: path is 250 characters or longer
 - violation: path contains the following illegal characters: '$', '%', '^', '*' or a space. Script easily modified to check for a different set of illegal characters.
   - optionally replaces illegal characters with `replace_char='-'`. `-` is the default. See **How to Run** below.
