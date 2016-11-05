@@ -31,7 +31,7 @@ def fix_chars(name,
 def join_paths_wrap(prefix_msg, root, name):
     return prefix_msg + os.path.join(root, name)
 
-
+f = open("file_compliance_log.txt", "w")
 valid_replace_args = ['-r', '--replace']
 if len(sys.argv) == 2 or len(sys.argv) == 3:
     root = sys.argv[1]
@@ -52,13 +52,13 @@ if len(sys.argv) == 2 or len(sys.argv) == 3:
     for root, dirs, files in os.walk(root, topdown=True):
         for name in files:
             if illegal_length(name) is True:
-                print(join_paths_wrap("Too long -->", root, name))
+                f.write(join_paths_wrap("Too long -->", root, name) + "\n")
             if illegal_characters(name) is True:
-                print(join_paths_wrap("Illegal chars -->", root, name))
+                f.write(join_paths_wrap("Illegal chars -->", root, name) + "\n")  # noqa
         for name in dirs:
             if illegal_length(name) is True:
-                print(join_paths_wrap("Too long -->", root, name))
+                f.write(join_paths_wrap("Too long -->", root, name) + "\n")
             if illegal_characters(name) is True:
-                print(join_paths_wrap("Illegal chars -->", root, name))
+                f.write(join_paths_wrap("Illegal chars -->", root, name) + "\n")  # noqa
 else:
     print("illegal number of arguments!!!")
