@@ -1,6 +1,6 @@
 import os
 import sys
-import re
+import argparse
 
 illegals = '$%^* '
 
@@ -31,6 +31,19 @@ def fix_chars(name,
 def join_paths_wrap(prefix_msg, root, name):
     return prefix_msg + os.path.join(root, name)
 
+
+def gather_args():
+    parser = argparse.ArgumentParser()
+
+    replace_help_msg = "Used to replace illegal characters automatically"
+    parser.add_argument('-r', "--replace", type=str, help=replace_help_msg)
+    parser.add_argument('-f', type=str, default="compliance_log.txt")
+    args = parse.parse_args()
+
+    return args
+
+
+args = gather_args
 f = open("file_compliance_log.txt", "w")
 valid_replace_args = ['-r', '--replace']
 if len(sys.argv) == 2 or len(sys.argv) == 3:
