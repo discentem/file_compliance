@@ -7,7 +7,7 @@
 
 **How to run**: `python3 path_compliance.py -d /path/to/folder` where `/path/to/folder` is the root directory you are interested in. `-d` is a required argument.
 - optional arguments:
-  - `-l <file.txt>` or `--log <file.txt>`, where `file.txt` is the name of the file where you want to log violations.
+  - `-l file.txt` or `--log file.txt`, where `file.txt` is the name of the file where you want to log violations.
   - `-c` or `--correct` to automatically replace illegal characters with `-`.
 
 **Contribute**: Please! Fork and PR as you wish!
