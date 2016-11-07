@@ -34,44 +34,40 @@ def join_paths_wrap(prefix_msg, root, name):
 
 def gather_args():
     parser = argparse.ArgumentParser()
-
     replace_help_msg = "Used to replace illegal characters automatically"
-    parser.add_argument('-r', "--replace", type=str, help=replace_help_msg)
-    parser.add_argument('-f', type=str, default="compliance_log.txt")
-    args = parse.parse_args()
+    parser.add_argument('-d', "--dir", "--directory",
+                        dest="directory",
+                        required=True)
+    parser.add_argument('-c', "--correct", default='',
+                        dest='reset',
+                        action='store_true',
+                        help=replace_help_msg)
+    parser.add_argument('-l', '--log', dest="log",
+                        default="compliance_log.txt")
+    return parser.parse_args()
 
-    return args
-
-
-args = gather_args
-f = open("file_compliance_log.txt", "w")
-valid_replace_args = ['-r', '--replace']
-if len(sys.argv) == 2 or len(sys.argv) == 3:
-    root = sys.argv[1]
-    try:
-        if sys.argv[2] in valid_replace_args:
-            for root, dirs, files in os.walk(root, topdown=True):
-                for name in files:
-                    if illegal_characters(name) is True:
-                        os.rename(join_paths_wrap('', root, name),
-                                  join_paths_wrap('', root, fix_chars(name)))
-                for name in dirs:
-                    if illegal_characters(name) is True:
-                        os.rename(join_paths_wrap('', root, name),
-                                  join_paths_wrap('', root, fix_chars(name)))
-    except IndexError:
-        pass
-
-    for root, dirs, files in os.walk(root, topdown=True):
+args = gather_args()
+f = open(args.log, "w")
+directory = args.directory
+if args.reset:
+    for root, dirs, files in os.walk(directory, topdown=True):
         for name in files:
-            if illegal_length(name) is True:
-                f.write(join_paths_wrap("Too long -->", root, name) + "\n")
             if illegal_characters(name) is True:
-                f.write(join_paths_wrap("Illegal chars -->", root, name) + "\n")  # noqa
+                os.rename(join_paths_wrap('', root, name),
+                          join_paths_wrap('', root, fix_chars(name)))
         for name in dirs:
-            if illegal_length(name) is True:
-                f.write(join_paths_wrap("Too long -->", root, name) + "\n")
             if illegal_characters(name) is True:
-                f.write(join_paths_wrap("Illegal chars -->", root, name) + "\n")  # noqa
-else:
-    print("illegal number of arguments!!!")
+                os.rename(join_paths_wrap('', root, name),
+                          join_paths_wrap('', root, fix_chars(name)))
+
+for root, dirs, files in os.walk(directory, topdown=True):
+    for name in files:
+        if illegal_length(name) is True:
+            f.write(join_paths_wrap("Too long -->", root, name) + "\n")
+        if illegal_characters(name) is True:
+            f.write(join_paths_wrap("Illegal chars -->", root, name) + "\n")  # noqa
+    for name in dirs:
+        if illegal_length(name) is True:
+            f.write(join_paths_wrap("Too long -->", root, name) + "\n")
+        if illegal_characters(name) is True:
+            f.write(join_paths_wrap("Illegal chars -->", root, name) + "\n")  # noqa
