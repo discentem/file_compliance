@@ -34,12 +34,8 @@ def join_paths_wrap(prefix_msg, root, name):
 
 def gather_args():
     parser = argparse.ArgumentParser()
-    parser.add_argument('-d', "--dir", "--directory",
-                        dest="directory",
-                        help=
-                        required=True)
-
-    replace_helpmsg = "Used to replace illegal characters automatically"
+    replace_help_msg = "Used to replace illegal characters automatically"
+    parser.add_argument('directory')
     parser.add_argument('-c', "--correct", default='',
                         dest='reset',
                         action='store_true',
