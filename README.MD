@@ -5,7 +5,7 @@
 - violation: path contains the following illegal characters: '$', '%', '^', '*' or a space. Script easily modified to check for a different set of illegal characters.
   - optionally replaces illegal characters with `replace_char='-'`. `-` is the default. See **How to Run** below.
 
-**How to run**: `python3 main.py -d /path/to/folder` where `/path/to/folder` is the root directory you are interested in. `-d` is a required argument.
+**How to run**: `python3 main.py /path/to/folder` where `/path/to/folder` is the root directory you are interested in. `-d` is a required argument.
 - optional arguments:
   - `-l file.txt` or `--log file.txt`, where `file.txt` is the name of the file where you want to log violations. If not specified, defaults to `log.txt`
   - `-c` or `--correct` to automatically replace illegal characters with `-`. (This flag needs no input.)
